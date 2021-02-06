@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Render</title>
+</head>
+<body>
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <span class="navbar-text">
+        Aprendendo RENDER somente com JavaScript. Vote na linguagem que você prefere.
+      </span>
+    </div>
+  </nav>
+
+  <main class="principal"></main>
+
+  <script>
+    // [DADOS] ==============
+    const linguagens = [
+      {
+        name: 'Java',
+        likes: 0,
+      },
+      {
+        name: 'C#',
+        likes: 0,
+      },
+      {
+        name: 'Nenhuma',
+        likes: 0,
+      },
+    ];
+    //======================
+
+    function handleClick(linguagemName){
+      linguagens.forEach((currentLinguagem) => {
+        if(linguagemName === currentLinguagem.name){
+          currentLinguagem.likes = currentLinguagem.likes + 1;
+        }
+      });
+      render();
+    }
+
+    // [LÓGICA DE RENDERIZAÇÃO]=================
+    const button = function(linguagem){
+        return `
+          <center><div class="card border-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header">${linguagem.name}</div>
+            <div class="card-body text-primary">
+              <h5 class="card-title">Quantidade de likes</h5>
+              <p class="card-text">${linguagem.likes}</p>
+            </div>
+            <button type="button" onclick="handleClick('${linguagem.name}')" class="btn btn-outline-primary">Like</button>
+          </div></center>
+        `;
+    }
+
+    function render(){
+      const principal = document.querySelector('.principal');
+      principal.innerHTML = linguagens.map((linguagem) => {
+        return button(linguagem);
+      }).join('');
+    }
+    render();
+  </script>
+
+</body>
+</html>
